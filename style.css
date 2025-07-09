@@ -1,8 +1,188 @@
 /* Custom CSS for Story Prompt Generator */
 
-/* Ensure the body uses the Inter font, provided by Google Fonts link in HTML */
+/* Define CSS Variables for colors in light mode (default) */
+:root {
+    /* Body Background Gradient */
+    --body-gradient-from: #8b5cf6; /* purple-600 */
+    --body-gradient-to: #3b82f6;   /* blue-500 */
+
+    /* Main Container & Navbar Background */
+    --element-bg: #ffffff;
+
+    /* Text Colors */
+    --text-primary: #1f2937;    /* gray-800 */
+    --text-secondary: #4b5563;  /* gray-600 / gray-700 */
+
+    /* Section Backgrounds & Borders */
+    --section-1-bg: #f9fafb;    /* gray-50 */
+    --section-1-border: #e5e7eb; /* gray-200 */
+
+    --section-2-bg: #f3e8ff;    /* purple-50 */
+    --section-2-border: #d8b4fe; /* purple-200 */
+
+    --section-3-bg: #ecfdf5;    /* green-50 */
+    --section-3-border: #a7f3d0; /* green-200 */
+
+    /* Prompt Display & Select */
+    --prompt-display-bg: #ffffff;
+    --prompt-display-text: #4b5563; /* gray-700 */
+    --prompt-display-border: #3b82f6; /* blue-500 */
+
+    /* AI Result Displays */
+    --ai-elaborate-bg: #e0f2fe; /* blue-100 */
+    --ai-elaborate-border: #60a5fa; /* blue-400 */
+    --ai-elaborate-text-heading: #1e40af; /* blue-800 */
+
+    --ai-twist-bg: #fce7f3;     /* pink-100 */
+    --ai-twist-border: #f472b6; /* pink-400 */
+    --ai-twist-text-heading: #9d174d;   /* pink-800 */
+
+    /* Theme Toggle Button */
+    --toggle-bg: #f3f4f6; /* gray-100 */
+    --toggle-text: #4b5563; /* gray-700 */
+
+    /* Resource Link Cards */
+    --resource-link-bg: #ffffff;
+}
+
+/* Dark Mode styles, applied when body has 'dark-mode' class */
+body.dark-mode {
+    /* Body Background Gradient */
+    --body-gradient-from: #1a202c; /* Darker background */
+    --body-gradient-to: #2d3748;   /* Darker background */
+
+    /* Main Container & Navbar Background */
+    --element-bg: #2d3748;          /* Dark gray for main container */
+
+    /* Text Colors */
+    --text-primary: #e2e8f0;    /* Light gray for primary text */
+    --text-secondary: #a0aec0;  /* Medium gray for secondary text */
+
+    /* Section Backgrounds & Borders */
+    --section-1-bg: #2d3748;    /* Dark gray for sections */
+    --section-1-border: #4a5568;  /* Darker border */
+
+    --section-2-bg: #4a0e4b;    /* Darker purple for AI section */
+    --section-2-border: #6b21a8;  /* Darker purple border */
+
+    --section-3-bg: #1a4d3a;    /* Darker green for resources section */
+    --section-3-border: #065f46;  /* Darker green border */
+
+    /* Prompt Display & Select */
+    --prompt-display-bg: #1a202c; /* Dark background for prompt */
+    --prompt-display-text: #e2e8f0; /* Light text for prompt */
+    --prompt-display-border: #60a5fa; /* Blue border */
+
+    /* AI Result Displays */
+    --ai-elaborate-bg: #1a202c; /* Dark background for AI results */
+    --ai-elaborate-border: #60a5fa; /* Blue border */
+    --ai-elaborate-text-heading: #90cdf4; /* Lighter blue text */
+
+    --ai-twist-bg: #1a202c;     /* Dark background for AI results */
+    --ai-twist-border: #f472b6; /* Pink border */
+    --ai-twist-text-heading: #fbb6ce;   /* Lighter pink text */
+
+    /* Theme Toggle Button */
+    --toggle-bg: #4a5568; /* Darker toggle button */
+    --toggle-text: #e2e8f0; /* Lighter toggle text */
+
+    /* Resource Link Cards */
+    --resource-link-bg: #1a202c; /* Dark background for resource cards */
+}
+
+/* Base styles and transitions for custom classes */
 body {
     font-family: 'Inter', sans-serif;
+    transition: background-color 0.5s ease-in-out; /* Smooth transition for body solid background */
+    /* Gradient handled by custom class below */
+}
+
+/* Apply gradient to body using custom class */
+.app-body {
+    background: linear-gradient(to bottom right, var(--body-gradient-from), var(--body-gradient-to));
+    transition: background 0.5s ease-in-out; /* Transition the entire background property */
+}
+
+/* Main container and Navbar */
+.app-main-content-wrapper, .app-navbar {
+    background-color: var(--element-bg);
+    transition: background-color 0.5s ease-in-out;
+}
+
+/* Text colors */
+.app-text-primary {
+    color: var(--text-primary);
+    transition: color 0.5s ease-in-out;
+}
+.app-text-secondary {
+    color: var(--text-secondary);
+    transition: color 0.5s ease-in-out;
+}
+
+/* Section backgrounds and borders */
+.app-section-1 {
+    background-color: var(--section-1-bg);
+    border: 1px solid var(--section-1-border); /* Added border for consistency */
+    transition: background-color 0.5s ease-in-out, border-color 0.5s ease-in-out;
+}
+.app-section-2 {
+    background-color: var(--section-2-bg);
+    border: 1px solid var(--section-2-border);
+    transition: background-color 0.5s ease-in-out, border-color 0.5s ease-in-out;
+}
+.app-section-3 {
+    background-color: var(--section-3-bg);
+    border: 1px solid var(--section-3-border);
+    transition: background-color 0.5s ease-in-out, border-color 0.5s ease-in-out;
+}
+
+/* Prompt Display & Select */
+.app-prompt-display {
+    background-color: var(--prompt-display-bg);
+    color: var(--prompt-display-text);
+    border-left: 4px solid var(--prompt-display-border);
+    transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out, border-color 0.5s ease-in-out;
+}
+
+.app-select {
+    background-color: var(--prompt-display-bg); /* Match prompt display for consistency */
+    color: var(--prompt-display-text);
+    border: 1px solid var(--section-1-border); /* Use a general section border color */
+    transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out, border-color 0.5s ease-in-out;
+}
+
+/* AI Result Displays */
+.app-ai-elaborate-display {
+    background-color: var(--ai-elaborate-bg);
+    border-left: 4px solid var(--ai-elaborate-border);
+    transition: background-color 0.5s ease-in-out, border-color 0.5s ease-in-out;
+}
+.app-ai-elaborate-display h3 {
+    color: var(--ai-elaborate-text-heading);
+    transition: color 0.5s ease-in-out;
+}
+
+.app-ai-twist-display {
+    background-color: var(--ai-twist-bg);
+    border-left: 4px solid var(--ai-twist-border);
+    transition: background-color 0.5s ease-in-out, border-color 0.5s ease-in-out;
+}
+.app-ai-twist-display h3 {
+    color: var(--ai-twist-text-heading);
+    transition: color 0.5s ease-in-out;
+}
+
+/* Theme Toggle Button */
+.app-theme-toggle {
+    background-color: var(--toggle-bg);
+    color: var(--toggle-text);
+    transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
+}
+
+/* Resource Link Cards */
+.app-resource-link {
+    background-color: var(--resource-link-bg);
+    transition: background-color 0.5s ease-in-out;
 }
 
 /* Basic animation for fade-in effect on prompt display and AI results */
@@ -36,17 +216,9 @@ body {
 }
 
 /* Additional responsive adjustments if needed, though Tailwind handles most */
-/* For example, if you wanted specific breakpoints for font sizes not covered by Tailwind's responsive classes */
 @media (max-width: 640px) {
     #prompt-display {
         font-size: 1rem; /* Smaller font on small screens */
         min-height: 100px;
     }
 }
-
-/* Custom styles for section backgrounds and borders (already mostly in Tailwind, but good to note) */
-/* .bg-gray-50, .bg-purple-50, .bg-green-50 are Tailwind classes for light backgrounds */
-/* .border-gray-200, .border-purple-200, .border-green-200 are Tailwind classes for light borders */
-/* .shadow-inner, .shadow-md are Tailwind classes for shadows */
-
-/* You can add more specific custom styles here if needed, e.g., for custom hover effects not in Tailwind */

@@ -128,7 +128,7 @@ document.addEventListener('DOMContentLoaded', () => {
         { category: "Historical", text: "A spy during the Cold War discovers a secret project to manipulate historical events." },
         { category: "Historical", text: "A young woman living in 1920s New York accidentally stumbles upon a speakeasy run by supernatural beings." },
         { category: "Historical", text: "During the construction of the Great Pyramids, a worker uncovers a hidden chamber containing technology far beyond their time." },
-        { category: "Historical", text: "A samurai in feudal Japan is tasked with protecting a mystical scroll that holds the key to controlling the weather." },
+        { category: "Historical", "text": "A samurai in feudal Japan is tasked with protecting a mystical scroll that holds the key to controlling the weather." },
         { category: "Historical", text: "A group of passengers on the Titanic discover a stowaway who claims to be from the future, warning them of the iceberg." },
         { category: "Historical", text: "In ancient Greece, a philosopher discovers a mathematical proof that can unravel the fabric of reality." },
         { category: "Historical", text: "A person living in a medieval village discovers a hidden talent for alchemy that could either save or destroy their community." },
@@ -183,13 +183,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const plotTwistDisplay = document.getElementById('plot-twist-display');
     const plotTwistText = plotTwistDisplay.querySelector('p');
     const messageBox = document.getElementById('message-box');
-    const categorySelect = document.getElementById('category-select'); // Category Select
+    const categorySelect = document.getElementById('category-select');
+    const themeToggle = document.getElementById('theme-toggle'); // Theme Toggle Button
+    const themeIcon = document.getElementById('theme-icon');     // Icon inside the toggle button
 
     let lastPromptIndex = -1; // To avoid showing the same prompt twice in a row
     let currentDisplayedPrompt = ""; // Store the currently displayed prompt text
 
     // Gemini API configuration
-    const apiKey = "AIzaSyDDSLuqFR7F43VSk_R27E77JcLrV7F5j0g"; // Canvas will automatically provide the API key at runtime
+    const apiKey = ""; // Canvas will automatically provide the API key at runtime
     const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
 
     /**
@@ -310,6 +312,7 @@ document.addEventListener('DOMContentLoaded', () => {
             generateBtn.disabled = true;
             copyBtn.disabled = true;
             categorySelect.disabled = true; // Disable category select during API call
+            themeToggle.disabled = true; // Disable theme toggle during API call
         } else {
             loadingIndicator.classList.add('hidden');
             elaborateBtn.disabled = false;
@@ -317,6 +320,7 @@ document.addEventListener('DOMContentLoaded', () => {
             generateBtn.disabled = false;
             copyBtn.disabled = false;
             categorySelect.disabled = false; // Enable category select after API call
+            themeToggle.disabled = false; // Enable theme toggle after API call
         }
     }
 
@@ -417,15 +421,48 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 3000); // Display for 3 seconds
     }
 
+    /**
+     * Toggles between light and dark mode.
+     */
+    function toggleTheme() {
+        document.body.classList.toggle('dark-mode');
+        const isDarkMode = document.body.classList.contains('dark-mode');
+        localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+        updateThemeIcon(isDarkMode);
+    }
+
+    /**
+     * Updates the theme toggle icon based on the current mode.
+     * @param {boolean} isDarkMode - True if currently in dark mode, false otherwise.
+     */
+    function updateThemeIcon(isDarkMode) {
+        if (isDarkMode) {
+            themeIcon.classList.remove('fa-sun');
+            themeIcon.classList.add('fa-moon');
+        } else {
+            themeIcon.classList.remove('fa-moon');
+            themeIcon.classList.add('fa-sun');
+        }
+    }
+
     // Initial setup when the DOM is loaded
     populateCategories(); // Populate categories on load
     displayNewPrompt(); // Display an initial prompt
+
+    // Apply saved theme preference on load
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+        document.body.classList.add('dark-mode');
+        updateThemeIcon(true);
+    } else {
+        updateThemeIcon(false); // Ensure sun icon is default/light mode
+    }
 
     // Event Listeners
     generateBtn.addEventListener('click', displayNewPrompt);
     copyBtn.addEventListener('click', copyPromptToClipboard);
     elaborateBtn.addEventListener('click', () => callGeminiAPI('elaborate', elaboratedPromptDisplay, elaboratedPromptText));
     twistBtn.addEventListener('click', () => callGeminiAPI('twist', plotTwistDisplay, plotTwistText));
-    // When category changes, generate a new prompt from that category
     categorySelect.addEventListener('change', displayNewPrompt);
+    themeToggle.addEventListener('click', toggleTheme); // Theme toggle event listener
 });
