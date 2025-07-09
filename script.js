@@ -184,14 +184,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const plotTwistText = plotTwistDisplay.querySelector('p');
     const messageBox = document.getElementById('message-box');
     const categorySelect = document.getElementById('category-select');
-    const themeToggle = document.getElementById('theme-toggle'); // Theme Toggle Button
-    const themeIcon = document.getElementById('theme-icon');     // Icon inside the toggle button
+    // Removed themeToggle and themeIcon references
 
-    // New elements for custom prompt
+    // Elements for custom prompt
     const customPromptInput = document.getElementById('custom-prompt-input');
     const useCustomPromptBtn = document.getElementById('use-custom-prompt-btn');
 
-    // New elements for character and conflict
+    // Elements for character and conflict
     const characterBtn = document.getElementById('character-btn');
     const characterDisplay = document.getElementById('character-display');
     const characterText = characterDisplay.querySelector('p');
@@ -200,12 +199,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const conflictDisplay = document.getElementById('conflict-display');
     const conflictText = conflictDisplay.querySelector('p');
 
+    // New elements for Notes/Scratchpad
+    const notesInput = document.getElementById('notes-input');
+    const clearNotesBtn = document.getElementById('clear-notes-btn');
+
 
     let lastPromptIndex = -1; // To avoid showing the same prompt twice in a row
     let currentDisplayedPrompt = ""; // Store the currently displayed prompt text
 
     // Gemini API configuration
-    const apiKey = ""; // Canvas will automatically provide the API key at runtime
+    const apiKey = "AIzaSyDDSLuqFR7F43VSk_R27E77JcLrV7F5j0g"; // Canvas will automatically provide the API key at runtime
     const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
 
     /**
@@ -239,6 +242,27 @@ document.addEventListener('DOMContentLoaded', () => {
             return storyPrompts;
         }
         return storyPrompts.filter(prompt => prompt.category === selectedCategory);
+    }
+
+    /**
+     * Gets a random prompt from the filtered list, ensuring it's not the same as the last one.
+     * @returns {Object} A random prompt object.
+     */
+    function getRandomPrompt() {
+        const selectedCategory = categorySelect.value;
+        const availablePrompts = getFilteredPrompts(selectedCategory);
+
+        if (availablePrompts.length === 0) {
+            return { text: "No prompts available for this category. Try another!" };
+        }
+
+        let randomIndex;
+        do {
+            randomIndex = Math.floor(Math.random() * availablePrompts.length);
+        } while (randomIndex === lastPromptIndex && availablePrompts.length > 1); // Ensure different prompt if more than one exists
+
+        lastPromptIndex = randomIndex;
+        return availablePrompts[randomIndex];
     }
 
     /**
@@ -340,9 +364,11 @@ document.addEventListener('DOMContentLoaded', () => {
             generateBtn.disabled = true;
             copyBtn.disabled = true;
             categorySelect.disabled = true; // Disable category select during API call
-            themeToggle.disabled = true; // Disable theme toggle during API call
+            // Removed themeToggle.disabled = true;
             useCustomPromptBtn.disabled = true; // Disable custom prompt button
             customPromptInput.disabled = true; // Disable custom prompt input
+            clearNotesBtn.disabled = true; // Disable clear notes button
+            notesInput.disabled = true; // Disable notes input
         } else {
             loadingIndicator.classList.add('hidden');
             elaborateBtn.disabled = false;
@@ -352,9 +378,11 @@ document.addEventListener('DOMContentLoaded', () => {
             generateBtn.disabled = false;
             copyBtn.disabled = false;
             categorySelect.disabled = false; // Enable category select after API call
-            themeToggle.disabled = false; // Enable theme toggle after API call
+            // Removed themeToggle.disabled = false;
             useCustomPromptBtn.disabled = false; // Enable custom prompt button
             customPromptInput.disabled = false; // Enable custom prompt input
+            clearNotesBtn.disabled = false; // Enable clear notes button
+            notesInput.disabled = false; // Enable notes input
         }
     }
 
@@ -465,42 +493,24 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 3000); // Display for 3 seconds
     }
 
-    /**
-     * Toggles between light and dark mode.
-     */
-    function toggleTheme() {
-        document.body.classList.toggle('dark-mode');
-        const isDarkMode = document.body.classList.contains('dark-mode');
-        localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
-        updateThemeIcon(isDarkMode);
-    }
+    // Removed toggleTheme and updateThemeIcon functions
 
     /**
-     * Updates the theme toggle icon based on the current mode.
-     * @param {boolean} isDarkMode - True if currently in dark mode, false otherwise.
+     * Clears the notes input field.
      */
-    function updateThemeIcon(isDarkMode) {
-        if (isDarkMode) {
-            themeIcon.classList.remove('fa-sun');
-            themeIcon.classList.add('fa-moon');
-        } else {
-            themeIcon.classList.remove('fa-moon');
-            themeIcon.classList.add('fa-sun');
-        }
+    function clearNotes() {
+        notesInput.value = '';
+        showMessageBox('Notes cleared!', 'bg-yellow-100 text-yellow-700');
     }
 
     // Initial setup when the DOM is loaded
     populateCategories(); // Populate categories on load
     displayNewRandomPrompt(); // Display an initial random prompt
 
-    // Apply saved theme preference on load
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark') {
-        document.body.classList.add('dark-mode');
-        updateThemeIcon(true);
-    } else {
-        updateThemeIcon(false); // Ensure sun icon is default/light mode
-    }
+    // No longer apply saved theme preference on load, as it's fixed to dark
+    // The body.dark-mode class and related logic are removed from style.css and script.js.
+    // The theme is now permanently dark blue as defined by the :root variables in style.css.
+
 
     // Event Listeners
     generateBtn.addEventListener('click', displayNewRandomPrompt); // Generate random prompt
@@ -512,8 +522,11 @@ document.addEventListener('DOMContentLoaded', () => {
     conflictBtn.addEventListener('click', () => callGeminiAPI('conflict', conflictDisplay, conflictText));
 
     categorySelect.addEventListener('change', displayNewRandomPrompt); // Change category, get new random
-    themeToggle.addEventListener('click', toggleTheme); // Theme toggle event listener
+    // Removed themeToggle.addEventListener('click', toggleTheme);
 
-    // New Event Listener for custom prompt
+    // Event Listener for custom prompt
     useCustomPromptBtn.addEventListener('click', useCustomPrompt);
+
+    // New Event Listener for Clear Notes button
+    clearNotesBtn.addEventListener('click', clearNotes);
 });
