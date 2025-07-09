@@ -17,123 +17,123 @@
 <body class="min-h-screen flex flex-col items-center justify-center p-4 font-inter app-body">
 
     <!-- Navbar -->
-    <nav class="p-4 rounded-xl shadow-lg w-full max-w-3xl mb-8 flex justify-between items-center app-navbar">
-        <div class="text-2xl font-bold app-text-primary">
+    <nav class="p-4 rounded-xl shadow-lg w-full max-w-3xl mb-8 flex flex-wrap justify-between items-center app-navbar">
+        <div class="text-2xl font-bold app-text-primary flex-shrink-0 mr-4">
             <a href="#top" class="hover:text-blue-600 transition-colors duration-200">StorySpark</a>
         </div>
-        <div class="flex items-center space-x-4">
-            <a href="#generator-section" class="app-text-secondary hover:text-blue-600 font-semibold transition-colors duration-200">Generator</a>
-            <a href="#ai-enhancements-section" class="app-text-secondary hover:text-blue-600 font-semibold transition-colors duration-200">AI Tools</a>
-            <a href="#resources-section" class="app-text-secondary hover:text-blue-600 font-semibold transition-colors duration-200">Resources</a>
+        <div class="flex flex-grow justify-end items-center space-x-2 sm:space-x-4">
+            <a href="#generator-section" class="app-text-secondary hover:text-blue-600 font-semibold transition-colors duration-200 px-2 py-1 rounded-md">Generator</a>
+            <a href="#ai-enhancements-section" class="app-text-secondary hover:text-blue-600 font-semibold transition-colors duration-200 px-2 py-1 rounded-md">AI Tools</a>
+            <a href="#resources-section" class="app-text-secondary hover:text-blue-600 font-semibold transition-colors duration-200 px-2 py-1 rounded-md">Resources</a>
             <!-- Dark/Light Mode Toggle Button -->
-            <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-200 app-theme-toggle focus:outline-none focus:ring-2 focus:ring-blue-300">
+            <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-200 app-theme-toggle focus:outline-none focus:ring-2 focus:ring-blue-300 flex-shrink-0">
                 <i class="fas fa-sun" id="theme-icon"></i>
             </button>
         </div>
     </nav>
 
-    <div class="p-8 rounded-xl shadow-2xl max-w-3xl w-full text-center flex flex-col gap-8 app-main-content-wrapper">
+    <div class="p-4 sm:p-8 rounded-xl shadow-2xl w-full max-w-3xl mx-auto text-center flex flex-col gap-6 sm:gap-8 app-main-content-wrapper">
         <!-- Header Section -->
-        <div id="top" class="mb-4">
-            <h1 class="text-4xl font-bold app-text-primary mb-2">Story Prompt Generator</h1>
-            <p class="app-text-secondary text-lg">Unleash your creativity with endless story ideas and AI-powered enhancements!</p>
+        <div id="top" class="mb-2 sm:mb-4">
+            <h1 class="text-3xl sm:text-4xl font-bold app-text-primary mb-1 sm:mb-2">Story Prompt Generator</h1>
+            <p class="app-text-secondary text-base sm:text-lg">Unleash your creativity with endless story ideas and AI-powered enhancements!</p>
         </div>
 
         <!-- Core Generator Section -->
-        <div id="generator-section" class="p-6 rounded-lg shadow-inner app-section-1">
-            <h2 class="text-2xl font-bold app-text-primary mb-4">Your Next Story Idea</h2>
+        <div id="generator-section" class="p-4 sm:p-6 rounded-lg shadow-inner app-section-1">
+            <h2 class="text-xl sm:text-2xl font-bold app-text-primary mb-3 sm:mb-4">Your Next Story Idea</h2>
             <!-- Category Selection -->
-            <div class="mb-6 flex flex-col sm:flex-row items-center justify-center gap-4">
-                <label for="category-select" class="text-lg font-semibold app-text-secondary">Filter by Category:</label>
-                <select id="category-select" class="p-2 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent w-full sm:w-auto app-select">
+            <div class="mb-4 sm:mb-6 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
+                <label for="category-select" class="text-base sm:text-lg font-semibold app-text-secondary">Filter by Category:</label>
+                <select id="category-select" class="p-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent w-full sm:w-auto app-select">
                     <option value="all">All Categories</option>
                     <!-- Categories will be dynamically populated by JavaScript -->
                 </select>
             </div>
 
             <!-- Prompt Display Area -->
-            <div id="prompt-display" class="p-6 rounded-lg mb-8 min-h-[120px] flex items-center justify-center text-xl italic shadow-md animate-fade-in app-prompt-display">
+            <div id="prompt-display" class="p-4 sm:p-6 rounded-lg mb-6 sm:mb-8 min-h-[100px] sm:min-h-[120px] flex items-center justify-center text-base sm:text-xl italic shadow-md animate-fade-in app-prompt-display">
                 Click "Generate Prompt" to get started!
             </div>
 
             <!-- Main Buttons -->
-            <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <button id="generate-btn" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg shadow-md transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-blue-300">
+            <div class="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
+                <button id="generate-btn" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 sm:py-3 sm:px-6 rounded-lg shadow-md transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-blue-300 w-full sm:w-auto">
                     <i class="fas fa-magic mr-2"></i> Generate New Prompt
                 </button>
-                <button id="copy-btn" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-3 px-6 rounded-lg shadow-md transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-gray-400">
+                <button id="copy-btn" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-2 px-4 sm:py-3 sm:px-6 rounded-lg shadow-md transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-gray-400 w-full sm:w-auto">
                     <i class="fas fa-copy mr-2"></i> Copy Prompt
                 </button>
             </div>
         </div>
 
         <!-- Gemini API Powered Features Section -->
-        <div id="ai-enhancements-section" class="p-6 rounded-lg shadow-inner app-section-2">
-            <h2 class="text-2xl font-bold app-text-primary mb-4">Enhance Your Prompt with AI</h2>
-            <p class="app-text-secondary mb-6">Use the power of AI to get more details or a surprising twist for your current prompt.</p>
-            <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <button id="elaborate-btn" class="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 px-6 rounded-lg shadow-md transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-purple-300">
+        <div id="ai-enhancements-section" class="p-4 sm:p-6 rounded-lg shadow-inner app-section-2">
+            <h2 class="text-xl sm:text-2xl font-bold app-text-primary mb-3 sm:mb-4">Enhance Your Prompt with AI</h2>
+            <p class="app-text-secondary text-base sm:text-lg mb-4 sm:mb-6">Use the power of AI to get more details or a surprising twist for your current prompt.</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
+                <button id="elaborate-btn" class="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-4 sm:py-3 sm:px-6 rounded-lg shadow-md transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-purple-300 w-full sm:w-auto">
                     <i class="fas fa-brain mr-2"></i> Elaborate on Prompt ✨
                 </button>
-                <button id="twist-btn" class="bg-pink-600 hover:bg-pink-700 text-white font-semibold py-3 px-6 rounded-lg shadow-md transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-pink-300">
+                <button id="twist-btn" class="bg-pink-600 hover:bg-pink-700 text-white font-semibold py-2 px-4 sm:py-3 sm:px-6 rounded-lg shadow-md transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-pink-300 w-full sm:w-auto">
                     <i class="fas fa-lightbulb mr-2"></i> Suggest Plot Twist ✨
                 </button>
             </div>
 
             <!-- Loading Indicator -->
-            <div id="loading-indicator" class="hidden mt-6 text-blue-500 font-medium">
+            <div id="loading-indicator" class="hidden mt-4 sm:mt-6 text-blue-500 font-medium text-base sm:text-lg">
                 <i class="fas fa-spinner fa-spin mr-2"></i> Generating ideas...
             </div>
 
             <!-- Elaborated Prompt Display -->
-            <div id="elaborated-prompt-display" class="p-6 rounded-lg mt-6 hidden text-left shadow-md animate-fade-in app-ai-elaborate-display">
-                <h3 class="font-semibold text-lg mb-2 app-ai-elaborate-text">Elaborated Prompt:</h3>
-                <p class="app-text-primary"></p>
+            <div id="elaborated-prompt-display" class="p-4 sm:p-6 rounded-lg mt-4 sm:mt-6 hidden text-left shadow-md animate-fade-in app-ai-elaborate-display">
+                <h3 class="font-semibold text-base sm:text-lg mb-2 app-ai-elaborate-text">Elaborated Prompt:</h3>
+                <p class="app-text-primary text-sm sm:text-base"></p>
             </div>
 
             <!-- Plot Twist Display -->
-            <div id="plot-twist-display" class="p-6 rounded-lg mt-6 hidden text-left shadow-md animate-fade-in app-ai-twist-display">
-                <h3 class="font-semibold text-lg mb-2 app-ai-twist-text">Suggested Plot Twist:</h3>
-                <p class="app-text-primary"></p>
+            <div id="plot-twist-display" class="p-4 sm:p-6 rounded-lg mt-4 sm:mt-6 hidden text-left shadow-md animate-fade-in app-ai-twist-display">
+                <h3 class="font-semibold text-base sm:text-lg mb-2 app-ai-twist-text">Suggested Plot Twist:</h3>
+                <p class="app-text-primary text-sm sm:text-base"></p>
             </div>
         </div>
 
         <!-- Writing Resources & Support Section (Monetization Hub) -->
-        <div id="resources-section" class="p-6 rounded-lg shadow-inner app-section-3">
-            <h2 class="text-2xl font-bold app-text-primary mb-4">Boost Your Writing Journey</h2>
-            <p class="app-text-secondary mb-6">Explore recommended tools, resources, and ways to support this project!</p>
+        <div id="resources-section" class="p-4 sm:p-6 rounded-lg shadow-inner app-section-3">
+            <h2 class="text-xl sm:text-2xl font-bold app-text-primary mb-3 sm:mb-4">Boost Your Writing Journey</h2>
+            <p class="app-text-secondary text-base sm:text-lg mb-4 sm:mb-6">Explore recommended tools, resources, and ways to support this project!</p>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-4 sm:mb-6">
                 <!-- Affiliate Link 1: Writing Software (Still a placeholder for now) -->
                 <a href="YOUR_WRITING_SOFTWARE_AFFILIATE_LINK" target="_blank" class="block p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200 text-left app-resource-link">
-                    <h3 class="font-semibold text-lg app-text-primary mb-1"><i class="fas fa-pen-nib mr-2 text-green-600"></i> Powerful Writing Software</h3>
-                    <p class="app-text-secondary text-sm">Find tools for outlining, drafting, and editing your masterpiece.</p>
+                    <h3 class="font-semibold text-base sm:text-lg app-text-primary mb-1"><i class="fas fa-pen-nib mr-2 text-green-600"></i> Powerful Writing Software</h3>
+                    <p class="app-text-secondary text-xs sm:text-sm">Find tools for outlining, drafting, and editing your masterpiece.</p>
                 </a>
                 <!-- Affiliate Link 2: Creative Writing Books (Still a placeholder for now) -->
                 <a href="YOUR_CREATIVE_WRITING_BOOKS_AFFILIATE_LINK" target="_blank" class="block p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200 text-left app-resource-link">
-                    <h3 class="font-semibold text-lg app-text-primary mb-1"><i class="fas fa-book-open mr-2 text-green-600"></i> Essential Writing Guides</h3>
-                    <p class="app-text-secondary text-sm">Learn new techniques and master your craft with top-rated books.</p>
+                    <h3 class="font-semibold text-base sm:text-lg app-text-primary mb-1"><i class="fas fa-book-open mr-2 text-green-600"></i> Essential Writing Guides</h3>
+                    <p class="app-text-secondary text-xs sm:text-sm">Learn new techniques and master your craft with top-rated books.</p>
                 </a>
                 <!-- Digital Product 1: Premium Prompt Packs -->
                 <a href="YOUR_PREMIUM_PROMPT_PACKS_LINK" target="_blank" class="block p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200 text-left app-resource-link">
-                    <h3 class="font-semibold text-lg app-text-primary mb-1"><i class="fas fa-star mr-2 text-green-600"></i> Exclusive Prompt Collections</h3>
-                    <p class="app-text-secondary text-sm">Unlock hundreds of unique, curated prompts for every genre.</p>
+                    <h3 class="font-semibold text-base sm:text-lg app-text-primary mb-1"><i class="fas fa-star mr-2 text-green-600"></i> Exclusive Prompt Collections</h3>
+                    <p class="app-text-secondary text-xs sm:text-sm">Unlock hundreds of unique, curated prompts for every genre.</p>
                 </a>
                 <!-- Digital Product 2: Story Planning Templates -->
                 <a href="YOUR_STORY_PLANNING_TEMPLATES_LINK" target="_blank" class="block p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200 text-left app-resource-link">
-                    <h3 class="font-semibold text-lg app-text-primary mb-1"><i class="fas fa-file-alt mr-2 text-green-600"></i> Printable Story Planners</h3>
-                    <p class="app-text-secondary text-sm">Organize your ideas with our downloadable character and plot templates.</p>
+                    <h3 class="font-semibold text-base sm:text-lg app-text-primary mb-1"><i class="fas fa-file-alt mr-2 text-green-600"></i> Printable Story Planners</h3>
+                    <p class="app-text-secondary text-xs sm:text-sm">Organize your ideas with our downloadable character and plot templates.</p>
                 </a>
             </div>
 
             <!-- Donation Call to Action -->
-            <div class="mt-8 pt-6 border-t border-gray-200">
-                <h3 class="font-semibold text-xl app-text-primary mb-3">Love this tool? Support its development!</h3>
-                <div class="flex flex-col sm:flex-row justify-center gap-4 mt-4">
-                    <a href="YOUR_BUY_ME_A_COFFEE_LINK" target="_blank" class="inline-block bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-8 rounded-lg shadow-md transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-yellow-300">
+            <div class="mt-4 sm:mt-8 pt-4 sm:pt-6 border-t border-gray-200">
+                <h3 class="font-semibold text-lg sm:text-xl app-text-primary mb-2 sm:mb-3">Love this tool? Support its development!</h3>
+                <div class="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 mt-3 sm:mt-4">
+                    <a href="YOUR_BUY_ME_A_COFFEE_LINK" target="_blank" class="inline-block bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-6 sm:py-3 sm:px-8 rounded-lg shadow-md transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-yellow-300 w-full sm:w-auto">
                         <i class="fas fa-mug-hot mr-2"></i> Buy Me a Coffee
                     </a>
-                    <a href="YOUR_PAYPAL_ME_LINK" target="_blank" class="inline-block bg-blue-700 hover:bg-blue-800 text-white font-bold py-3 px-8 rounded-lg shadow-md transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-blue-400">
+                    <a href="YOUR_PAYPAL_ME_LINK" target="_blank" class="inline-block bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 px-6 sm:py-3 sm:px-8 rounded-lg shadow-md transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-blue-400 w-full sm:w-auto">
                         <i class="fab fa-paypal mr-2"></i> Donate via PayPal
                     </a>
                 </div>
@@ -141,12 +141,12 @@
         </div>
 
         <!-- Message Box for Copy Confirmation and API Errors -->
-        <div id="message-box" class="mt-6 p-3 bg-green-100 text-green-700 rounded-lg hidden transition-opacity duration-300 opacity-0">
+        <div id="message-box" class="mt-4 sm:mt-6 p-3 bg-green-100 text-green-700 rounded-lg hidden transition-opacity duration-300 opacity-0">
             Prompt copied to clipboard!
         </div>
 
         <!-- Affiliate Disclosure -->
-        <p class="text-xs text-gray-500 mt-4 app-text-secondary">
+        <p class="text-xs text-gray-500 mt-2 sm:mt-4 app-text-secondary">
             Note: This site may contain product links. If you make a purchase through these links, I may earn a small commission at no extra cost to you. This helps support the site!
         </p>
     </div>
