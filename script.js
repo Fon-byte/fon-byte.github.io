@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
         { category: "Contemporary/Slice of Life", text: "A group of elderly friends decides to start a YouTube channel reviewing video games." },
         { category: "Contemporary/Slice of Life", text: "A person who hates public speaking is forced to give a TED Talk about their unusual hobby." },
         { category: "Contemporary/Slice of Life", text: "A small-town baker accidentally creates a sourdough starter that has a personality." },
-        { category: "Contemporary/Slice of Life", text: "A group of online friends decides to meet in person for the first time, leading to unexpected revelations." },
+        { category: "Contemporary/Slice of Life", text: "A group of online friends decides to meet in person for the first first time, leading to unexpected revelations." },
         { category: "Contemporary/Slice of Life", text: "A person tries to live a week without using any technology, relying solely on old-fashioned methods." },
         { category: "Contemporary/Slice of Life", text: "A dog walker accidentally uncovers a local scandal while eavesdropping on their clients' pets." },
 
@@ -187,6 +187,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const themeToggle = document.getElementById('theme-toggle'); // Theme Toggle Button
     const themeIcon = document.getElementById('theme-icon');     // Icon inside the toggle button
 
+    // New elements for custom prompt
+    const customPromptInput = document.getElementById('custom-prompt-input');
+    const useCustomPromptBtn = document.getElementById('use-custom-prompt-btn');
+
+    // New elements for character and conflict
+    const characterBtn = document.getElementById('character-btn');
+    const characterDisplay = document.getElementById('character-display');
+    const characterText = characterDisplay.querySelector('p');
+
+    const conflictBtn = document.getElementById('conflict-btn');
+    const conflictDisplay = document.getElementById('conflict-display');
+    const conflictText = conflictDisplay.querySelector('p');
+
+
     let lastPromptIndex = -1; // To avoid showing the same prompt twice in a row
     let currentDisplayedPrompt = ""; // Store the currently displayed prompt text
 
@@ -228,30 +242,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /**
-     * Selects a random prompt from the filtered array, ensuring it's not the same as the last one.
-     * @returns {Object} A random story prompt object { category: string, text: string }.
+     * Updates the main prompt display area with a given text.
+     * Also clears previous AI results and updates currentDisplayedPrompt.
+     * @param {string} text - The text to display.
      */
-    function getRandomPrompt() {
-        const selectedCategory = categorySelect.value;
-        const filteredPrompts = getFilteredPrompts(selectedCategory);
-
-        if (filteredPrompts.length === 0) {
-            showMessageBox('No prompts found for this category!', 'bg-yellow-100 text-yellow-700');
-            return { category: "", text: "No prompts available for this category. Try another!" };
-        }
-
-        let randomIndex;
-        do {
-            randomIndex = Math.floor(Math.random() * filteredPrompts.length);
-        } while (randomIndex === lastPromptIndex && filteredPrompts.length > 1); // Ensure different prompt if possible
-        lastPromptIndex = randomIndex;
-        return filteredPrompts[randomIndex];
-    }
-
-    /**
-     * Displays a new prompt on the page.
-     */
-    function displayNewPrompt() {
+    function updateMainPromptDisplay(text) {
         // Clear previous AI-generated content
         elaboratedPromptDisplay.classList.add('hidden');
         elaboratedPromptDisplay.classList.remove('animate-fade-in');
@@ -261,6 +256,15 @@ document.addEventListener('DOMContentLoaded', () => {
         plotTwistDisplay.classList.remove('animate-fade-in');
         plotTwistText.textContent = '';
 
+        characterDisplay.classList.add('hidden'); // Clear new AI displays
+        characterDisplay.classList.remove('animate-fade-in');
+        characterText.textContent = '';
+
+        conflictDisplay.classList.add('hidden'); // Clear new AI displays
+        conflictDisplay.classList.remove('animate-fade-in');
+        conflictText.textContent = '';
+
+
         // Remove previous animation class to allow re-triggering
         promptDisplay.classList.remove('animate-fade-in');
         // Force reflow to restart animation
@@ -268,9 +272,31 @@ document.addEventListener('DOMContentLoaded', () => {
         // Add animation class
         promptDisplay.classList.add('animate-fade-in');
 
+        promptDisplay.textContent = text;
+        currentDisplayedPrompt = text; // Update the stored prompt
+    }
+
+    /**
+     * Displays a new random prompt from the internal list.
+     * Clears the custom prompt input.
+     */
+    function displayNewRandomPrompt() {
         const selectedPrompt = getRandomPrompt();
-        promptDisplay.textContent = selectedPrompt.text;
-        currentDisplayedPrompt = selectedPrompt.text; // Update the stored prompt
+        updateMainPromptDisplay(selectedPrompt.text);
+        customPromptInput.value = ''; // Clear custom input when a new random prompt is generated
+    }
+
+    /**
+     * Handles setting the prompt display from user's custom input.
+     */
+    function useCustomPrompt() {
+        const customText = customPromptInput.value.trim();
+        if (customText) {
+            updateMainPromptDisplay(customText);
+            showMessageBox('Your custom prompt is now active!', 'bg-blue-100 text-blue-700');
+        } else {
+            showMessageBox('Please enter text in the custom prompt field.', 'bg-yellow-100 text-yellow-700');
+        }
     }
 
     /**
@@ -309,24 +335,32 @@ document.addEventListener('DOMContentLoaded', () => {
             loadingIndicator.classList.remove('hidden');
             elaborateBtn.disabled = true;
             twistBtn.disabled = true;
+            characterBtn.disabled = true; // Disable new buttons
+            conflictBtn.disabled = true; // Disable new buttons
             generateBtn.disabled = true;
             copyBtn.disabled = true;
             categorySelect.disabled = true; // Disable category select during API call
             themeToggle.disabled = true; // Disable theme toggle during API call
+            useCustomPromptBtn.disabled = true; // Disable custom prompt button
+            customPromptInput.disabled = true; // Disable custom prompt input
         } else {
             loadingIndicator.classList.add('hidden');
             elaborateBtn.disabled = false;
             twistBtn.disabled = false;
+            characterBtn.disabled = false; // Enable new buttons
+            conflictBtn.disabled = false; // Enable new buttons
             generateBtn.disabled = false;
             copyBtn.disabled = false;
             categorySelect.disabled = false; // Enable category select after API call
             themeToggle.disabled = false; // Enable theme toggle after API call
+            useCustomPromptBtn.disabled = false; // Enable custom prompt button
+            customPromptInput.disabled = false; // Enable custom prompt input
         }
     }
 
     /**
      * Generic function to call Gemini API and display result.
-     * @param {string} type - 'elaborate' or 'twist'
+     * @param {string} type - 'elaborate', 'twist', 'character', or 'conflict'
      * @param {HTMLElement} displayElement - The HTML element to display the result.
      * @param {HTMLElement} textElement - The inner <p> element to set text content.
      */
@@ -335,7 +369,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const promptToAnalyze = currentDisplayedPrompt;
 
         if (!promptToAnalyze || promptToAnalyze === "Click \"Generate Prompt\" to get started!" || promptToAnalyze === "No prompts available for this category. Try another!") {
-            showMessageBox('Please generate a story prompt first!', 'bg-yellow-100 text-yellow-700');
+            showMessageBox('Please generate or enter a story prompt first!', 'bg-yellow-100 text-yellow-700');
             return;
         }
 
@@ -345,16 +379,26 @@ document.addEventListener('DOMContentLoaded', () => {
         textElement.textContent = ''; // Clear previous text
 
         let apiPrompt;
-        if (type === 'elaborate') {
-            apiPrompt = `Elaborate on the following story prompt, providing more details about the setting, character, or initial conflict, but do not resolve the story: "${promptToAnalyze}"`;
-        } else if (type === 'twist') {
-            apiPrompt = `Suggest a surprising and compelling plot twist for the following story prompt: "${promptToAnalyze}"`;
-        } else {
-            console.error('Invalid API call type:', type);
-            showMessageBox('Internal error: Invalid API call type.', 'bg-red-100 text-red-700');
-            setLoadingState(false);
-            return;
+        switch (type) {
+            case 'elaborate':
+                apiPrompt = `Elaborate on the following story prompt, providing more details about the setting, character, or initial conflict, but do not resolve the story: "${promptToAnalyze}"`;
+                break;
+            case 'twist':
+                apiPrompt = `Suggest a surprising and compelling plot twist for the following story prompt: "${promptToAnalyze}"`;
+                break;
+            case 'character':
+                apiPrompt = `Based on the following story prompt, suggest a brief character idea including their name, a key personality trait, and a simple goal: "${promptToAnalyze}"`;
+                break;
+            case 'conflict':
+                apiPrompt = `Based on the following story prompt, suggest a compelling internal or external conflict that the main character could face: "${promptToAnalyze}"`;
+                break;
+            default:
+                console.error('Invalid API call type:', type);
+                showMessageBox('Internal error: Invalid API call type.', 'bg-red-100 text-red-700');
+                setLoadingState(false);
+                return;
         }
+
 
         try {
             let chatHistory = [];
@@ -406,7 +450,7 @@ document.addEventListener('DOMContentLoaded', () => {
      */
     function showMessageBox(message, typeClass) {
         messageBox.textContent = message;
-        messageBox.className = `mt-6 p-3 rounded-lg transition-opacity duration-300 ${typeClass}`;
+        messageBox.className = `mt-4 sm:mt-6 p-3 rounded-lg transition-opacity duration-300 ${typeClass}`; // Use app-specific padding
         messageBox.classList.remove('hidden', 'opacity-0', 'fade-out'); // Ensure it's visible and not fading out
         messageBox.classList.add('opacity-100'); // Make it fully visible
 
@@ -447,7 +491,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initial setup when the DOM is loaded
     populateCategories(); // Populate categories on load
-    displayNewPrompt(); // Display an initial prompt
+    displayNewRandomPrompt(); // Display an initial random prompt
 
     // Apply saved theme preference on load
     const savedTheme = localStorage.getItem('theme');
@@ -459,10 +503,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Event Listeners
-    generateBtn.addEventListener('click', displayNewPrompt);
+    generateBtn.addEventListener('click', displayNewRandomPrompt); // Generate random prompt
     copyBtn.addEventListener('click', copyPromptToClipboard);
     elaborateBtn.addEventListener('click', () => callGeminiAPI('elaborate', elaboratedPromptDisplay, elaboratedPromptText));
     twistBtn.addEventListener('click', () => callGeminiAPI('twist', plotTwistDisplay, plotTwistText));
-    categorySelect.addEventListener('change', displayNewPrompt);
+    // New AI feature event listeners
+    characterBtn.addEventListener('click', () => callGeminiAPI('character', characterDisplay, characterText));
+    conflictBtn.addEventListener('click', () => callGeminiAPI('conflict', conflictDisplay, conflictText));
+
+    categorySelect.addEventListener('change', displayNewRandomPrompt); // Change category, get new random
     themeToggle.addEventListener('click', toggleTheme); // Theme toggle event listener
+
+    // New Event Listener for custom prompt
+    useCustomPromptBtn.addEventListener('click', useCustomPrompt);
 });

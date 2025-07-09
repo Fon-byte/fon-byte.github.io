@@ -37,12 +37,26 @@
     --ai-twist-border: #f472b6; /* pink-400 */
     --ai-twist-text-heading: #9d174d;   /* pink-800 */
 
+    --ai-character-bg: #dcfce7; /* green-100 */
+    --ai-character-border: #4ade80; /* green-400 */
+    --ai-character-text-heading: #166534; /* green-800 */
+
+    --ai-conflict-bg: #fee2e2; /* red-100 */
+    --ai-conflict-border: #f87171; /* red-400 */
+    --ai-conflict-text-heading: #991b1b; /* red-800 */
+
+
     /* Theme Toggle Button */
     --toggle-bg: #f3f4f6; /* gray-100 */
     --toggle-text: #4b5563; /* gray-700 */
 
     /* Resource Link Cards */
     --resource-link-bg: #ffffff;
+
+    /* Custom Textarea */
+    --custom-textarea-bg: #ffffff;
+    --custom-textarea-border: #d1d5db; /* gray-300 */
+    --custom-textarea-text: #374151; /* gray-700 */
 }
 
 /* Dark Mode styles, applied when body has 'dark-mode' class */
@@ -82,12 +96,26 @@ body.dark-mode {
     --ai-twist-border: #f472b6; /* Pink border */
     --ai-twist-text-heading: #fbb6ce;   /* Lighter pink text */
 
+    --ai-character-bg: #1a202c; /* Dark background for AI results */
+    --ai-character-border: #4ade80; /* Green border */
+    --ai-character-text-heading: #90ee90; /* Lighter green text */
+
+    --ai-conflict-bg: #1a202c; /* Dark background for AI results */
+    --ai-conflict-border: #f87171; /* Red border */
+    --ai-conflict-text-heading: #ef4444; /* Lighter red text */
+
+
     /* Theme Toggle Button */
     --toggle-bg: #4a5568; /* Darker toggle button */
     --toggle-text: #e2e8f0; /* Lighter toggle text */
 
     /* Resource Link Cards */
     --resource-link-bg: #1a202c; /* Dark background for resource cards */
+
+    /* Custom Textarea */
+    --custom-textarea-bg: #1a202c;
+    --custom-textarea-border: #4a5568; /* Darker gray border */
+    --custom-textarea-text: #e2e8f0;
 }
 
 /* Base styles and transitions for custom classes */
@@ -172,6 +200,28 @@ body {
     transition: color 0.5s ease-in-out;
 }
 
+/* New AI Result Displays */
+.app-ai-character-display {
+    background-color: var(--ai-character-bg);
+    border-left: 4px solid var(--ai-character-border);
+    transition: background-color 0.5s ease-in-out, border-color 0.5s ease-in-out;
+}
+.app-ai-character-display h3 {
+    color: var(--ai-character-text-heading);
+    transition: color 0.5s ease-in-out;
+}
+
+.app-ai-conflict-display {
+    background-color: var(--ai-conflict-bg);
+    border-left: 4px solid var(--ai-conflict-border);
+    transition: background-color 0.5s ease-in-out, border-color 0.5s ease-in-out;
+}
+.app-ai-conflict-display h3 {
+    color: var(--ai-conflict-text-heading);
+    transition: color 0.5s ease-in-out;
+}
+
+
 /* Theme Toggle Button */
 .app-theme-toggle {
     background-color: var(--toggle-bg);
@@ -184,6 +234,19 @@ body {
     background-color: var(--resource-link-bg);
     transition: background-color 0.5s ease-in-out;
 }
+
+/* Custom Textarea Styling */
+.app-custom-textarea {
+    background-color: var(--custom-textarea-bg);
+    border: 1px solid var(--custom-textarea-border);
+    color: var(--custom-textarea-text);
+    transition: background-color 0.5s ease-in-out, border-color 0.5s ease-in-out, color 0.5s ease-in-out;
+}
+.app-custom-textarea::placeholder { /* For placeholder text */
+    color: var(--text-secondary); /* Use secondary text color for placeholder */
+    opacity: 0.7; /* Make it slightly transparent */
+}
+
 
 /* Basic animation for fade-in effect on prompt display and AI results */
 @keyframes fadeIn {
