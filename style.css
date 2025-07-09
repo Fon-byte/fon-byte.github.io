@@ -1,0 +1,52 @@
+/* Custom CSS for Story Prompt Generator */
+
+/* Ensure the body uses the Inter font, provided by Google Fonts link in HTML */
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+/* Basic animation for fade-in effect on prompt display and AI results */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+/* Keyframe for message box fade out */
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+.fade-out {
+    animation: fadeOut 0.5s ease-out forwards;
+}
+
+/* Additional responsive adjustments if needed, though Tailwind handles most */
+/* For example, if you wanted specific breakpoints for font sizes not covered by Tailwind's responsive classes */
+@media (max-width: 640px) {
+    #prompt-display {
+        font-size: 1rem; /* Smaller font on small screens */
+        min-height: 100px;
+    }
+}
+
+/* Custom styles for section backgrounds and borders (already mostly in Tailwind, but good to note) */
+/* .bg-gray-50, .bg-purple-50, .bg-green-50 are Tailwind classes for light backgrounds */
+/* .border-gray-200, .border-purple-200, .border-green-200 are Tailwind classes for light borders */
+/* .shadow-inner, .shadow-md are Tailwind classes for shadows */
+
+/* You can add more specific custom styles here if needed, e.g., for custom hover effects not in Tailwind */
