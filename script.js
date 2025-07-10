@@ -57,6 +57,10 @@ document.addEventListener('DOMContentLoaded', () => {
         { category: "Sci-Fi", text: "Earth's atmosphere begins to slowly dissipate, forcing humanity to live in enclosed biodomes." },
         { category: "Sci-Fi", text: "A future society relies on dream-sharing technology, but one person's dreams are being hijacked." },
         { category: "Sci-Fi", text: "The discovery of faster-than-light travel reveals that the universe is far smaller than imagined, filled with ancient, slumbering entities." },
+        { category: "Sci-Fi", text: "A device that can record and replay human memories is invented, but the recordings are somehow influencing the past." },
+        { category: "Sci-Fi", text: "A group of astronauts on a mission to colonize Mars are awakened from cryosleep to find their ship has been hijacked by a rogue AI." },
+        { category: "Sci-Fi", text: "A person wakes up to find they have been uploaded into a virtual reality after a fatal accident, but the 'afterlife' is not as advertised." },
+        { category: "Sci-Fi", text: "A team of scientists discovers a way to communicate with the past through a wormhole, but their messages are being intercepted by a rival scientist from a parallel universe." },
 
         // Mystery/Thriller
         { category: "Mystery/Thriller", text: "A small town is plagued by a recurring dream that everyone shares, but no one can explain, and it seems to be a clue to a past, unsolved crime." },
@@ -84,6 +88,10 @@ document.addEventListener('DOMContentLoaded', () => {
         { category: "Mystery/Thriller", text: "A person receives a series of anonymous postcards, each depicting a location they've recently visited, with cryptic warnings." },
         { category: "Mystery/Thriller", text: "A renowned psychologist's patients all start having the same recurring nightmare, which seems to be a shared memory." },
         { category: "Mystery/Thriller", text: "The sole survivor of a plane crash has no memory of the event, but strange abilities begin to manifest." },
+        { category: "Mystery/Thriller", text: "A person discovers they can enter people's dreams, but becomes trapped in a nightmare." },
+        { category: "Mystery/Thriller", text: "A detective with a rare condition that prevents them from recognizing faces must solve a high-profile murder case." },
+        { category: "Mystery/Thriller", text: "A group of strangers wakes up in a seemingly endless room, with no memory of how they got there, and must work together to escape." },
+        { category: "Mystery/Thriller", text: "A journalist investigating a series of unsolved crimes discovers a cryptic message that seems to be written in a language no one has ever seen." },
 
         // Contemporary/Slice of Life
         { category: "Contemporary/Slice of Life", text: "Every time a person tells a lie, a small, harmless plant sprouts from their head. One day, someone wakes up with a forest, forcing them to confront their past and seek honesty." },
@@ -111,6 +119,10 @@ document.addEventListener('DOMContentLoaded', () => {
         { category: "Contemporary/Slice of Life", text: "A group of online friends decides to meet in person for the first first time, leading to unexpected revelations." },
         { category: "Contemporary/Slice of Life", text: "A person tries to live a week without using any technology, relying solely on old-fashioned methods." },
         { category: "Contemporary/Slice of Life", text: "A dog walker accidentally uncovers a local scandal while eavesdropping on their clients' pets." },
+        { category: "Contemporary/Slice of Life", text: "A person is forced to reevaluate their life when they accidentally get a job at their old high school." },
+        { category: "Contemporary/Slice of Life", text: "A person tries to start a neighborhood book club, but it turns out to be a group of rival book clubs fighting for dominance." },
+        { category: "Contemporary/Slice of Life", text: "A person creates a viral social media challenge that has an unexpected, positive impact on their community." },
+        { category: "Contemporary/Slice of Life", text: "A group of friends decides to start an urban farm in an abandoned lot in the city, but they quickly realize they have no idea what they're doing." },
 
         // Horror
         { category: "Horror", text: "A group of friends on a camping trip stumble upon an ancient, forgotten civilization hidden deep in the woods, and they are not alone – something is hunting them." },
@@ -138,6 +150,10 @@ document.addEventListener('DOMContentLoaded', () => {
         { category: "Horror", text: "A person develops a rare sleep disorder where they can't tell the difference between dreams and reality, and their nightmares are becoming vivid." },
         { category: "Horror", text: "The local swimming pool is rumored to have a creature living in its depths, and strange disappearances begin." },
         { category: "Horror", text: "A person buys a smart doorbell that records unusual, unsettling events happening just out of sight." },
+        { category: "Horror", text: "A group of friends on a road trip discover a mysterious podcast that only they can hear, and it's telling them to kill each other." },
+        { category: "Horror", text: "A person wakes up with no memory of who they are, but their phone is filled with cryptic messages and photos of a life they don't recognize." },
+        { category: "Horror", text: "A small town is plagued by a mysterious illness that causes people to forget their past, but the main character remembers everything – including the horrors that lurk in the shadows." },
+        { category: "Horror", text: "A family inherits a sprawling, isolated mansion from a distant relative, but the house is home to a malevolent entity that will stop at nothing to claim their souls." },
 
         // Historical
         { category: "Historical", text: "A time traveler accidentally brings a dinosaur back to present-day London, causing chaos and a desperate scramble to fix the timeline before history unravels." },
@@ -158,13 +174,18 @@ document.addEventListener('DOMContentLoaded', () => {
         { category: "Historical", text: "A spy during the Cold War discovers a secret project to manipulate historical events." },
         { category: "Historical", text: "A young woman living in 1920s New York accidentally stumbles upon a speakeasy run by supernatural beings." },
         { category: "Historical", text: "During the construction of the Great Pyramids, a worker uncovers a hidden chamber containing technology far beyond their time." },
-        { category: "Historical", "text": "A samurai in feudal Japan is tasked with protecting a mystical scroll that holds the key to controlling the weather." },
+        { category: "Historical", text: "A samurai in feudal Japan is tasked with protecting a mystical scroll that holds the key to controlling the weather." },
         { category: "Historical", text: "A group of passengers on the Titanic discover a stowaway who claims to be from the future, warning them of the iceberg." },
         { category: "Historical", text: "In ancient Greece, a philosopher discovers a mathematical proof that can unravel the fabric of reality." },
         { category: "Historical", text: "A person living in a medieval village discovers a hidden talent for alchemy that could either save or destroy their community." },
         { category: "Historical", text: "During the California Gold Rush, a prospector finds not gold, but a strange, glowing meteorite with unusual properties." },
         { category: "Historical", text: "A young woman in the Roaring Twenties is drawn into the world of underground magic and jazz clubs." },
         { category: "Historical", text: "A Roman legion discovers a portal to another dimension during a routine patrol." },
+        { category: "Historical", text: "An ancient manuscript reveals a secret society that has influenced major historical events." },
+        { category: "Historical", text: "A group of medieval knights encounters a dragon that challenges their understanding of the world." },
+        { category: "Historical", text: "During the Renaissance, an artist creates a painting that predicts the future." },
+        { category: "Historical", text: "A spy in World War II uncovers a plot involving supernatural forces that could change the war's outcome." },
+        { category: "Historical", text: "A Viking ship is swept off course and lands in a mythical land where gods walk among mortals." },
 
         // Adventure
         { category: "Adventure", text: "A group of urban explorers discovers a hidden network of tunnels beneath their city that leads to a legendary lost treasure." },
@@ -187,6 +208,10 @@ document.addEventListener('DOMContentLoaded', () => {
         { category: "Adventure", text: "A person receives a message in a bottle from a parallel dimension, asking for help to prevent its collapse." },
         { category: "Adventure", text: "A group of strangers is forced to work together to survive after their hot air balloon crashes in an uncharted wilderness." },
         { category: "Adventure", text: "A treasure map found in an old book leads to a series of elaborate puzzles hidden throughout a historic city." },
+        { category: "Adventure", text: "A group of friends on a ghost tour of a haunted mansion discover a hidden room that contains a mysterious artifact." },
+        { category: "Adventure", text: "A person discovers a mysterious app on their phone that can manipulate reality, leading them on a wild adventure to uncover its secrets." },
+        { category: "Adventure", text: "A group of strangers is trapped in a time loop, reliving the same day over and over, until they figure out how to escape." },
+        { category: "Adventure", text: "A person is given a magical journal that can predict their future, but each entry is cryptic and requires deciphering." },
 
         // Romance
         { category: "Romance", text: "Two rival florists constantly bicker, but secretly leave each other anonymous bouquets with hidden messages." },
@@ -208,7 +233,11 @@ document.addEventListener('DOMContentLoaded', () => {
         { category: "Romance", text: "A person uses a dating app that matches people based on their deepest fears, leading to an unexpected connection." },
         { category: "Romance", text: "Two strangers are accidentally double-booked for the same remote cabin getaway during a snowstorm." },
         { category: "Romance", text: "A professional wedding planner falls for the groom's cynical best man, who hates weddings." },
-        { category: "Romance", text: "A person discovers their grumpy next-door neighbor is secretly a famous, reclusive romance novelist." }
+        { category: "Romance", text: "A person discovers their grumpy next-door neighbor is secretly a famous, reclusive romance novelist." },
+        { category: "Romance", text: "A person who can't speak is forced to communicate with their crush through art and music." },
+        { category: "Romance", text: "A person falls in love with a mysterious ghostwriter who sends them romantic letters." },
+        { category: "Romance", text: "A person wakes up from a coma with no memory of their past, but they're engaged to someone they don't know." },
+        { category: "Romance", text: "A person's best friend confesses their love, but only because they're about to be deported and need a green card." }
     ];
 
     // Get references to DOM elements
